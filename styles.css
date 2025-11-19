@@ -1,851 +1,561 @@
-<style>
-    :root {
-      --bg-main: #06020a;
-      --bg-alt: #100618;
-      --bg-card: rgba(11, 3, 24, 0.9);
-      --primary: #b71c1c;   /* vermelho ritual */
-      --primary-soft: #e53935;
-      --accent: #ffb300;    /* dourado */
-      --accent-soft: #ffecb3;
-      --violet: #7b1fa2;
-      --text-main: #fefaf4;
-      --text-muted: #c8b8ff;
-      --border-soft: rgba(255, 255, 255, 0.08);
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.7);
-      --radius-xl: 22px;
-      --radius-lg: 16px;
-      --glass-blur: 18px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 10% 0, rgba(183, 28, 28, 0.45), transparent 55%),
-        radial-gradient(circle at 90% 100%, rgba(123, 31, 162, 0.45), transparent 50%),
-        radial-gradient(circle at 10% 100%, rgba(255, 179, 0, 0.3), transparent 55%),
-        var(--bg-main);
-      color: var(--text-main);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Overlay místico com símbolos */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.06) 0, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.04) 0, transparent 50%);
-      opacity: 0.7;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    /* HEADER / NAV */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(var(--glass-blur));
-      background: linear-gradient(to right, rgba(6, 2, 10, 0.98), rgba(11, 3, 24, 0.95));
-      border-bottom: 1px solid var(--border-soft);
-    }
-
-    .nav {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0.7rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-    }
-
-    .logo-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #fff4, transparent),
-                  radial-gradient(circle at 70% 80%, #ffb30022, transparent),
-                  linear-gradient(145deg, #2d0b3a, #6a1b9a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .logo-icon::before {
-      content: "";
-      position: absolute;
-      width: 120%;
-      height: 120%;
-      border-radius: inherit;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      mix-blend-mode: screen;
-    }
-
-    .logo-eye {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 236, 179, 0.95);
-      position: relative;
-      box-shadow: 0 0 12px rgba(255, 236, 179, 0.6);
-    }
-
-    .logo-eye::before {
-      content: "";
-      position: absolute;
-      inset: 4px;
-      border-radius: 50%;
-      border: 2px solid rgba(183, 28, 28, 0.9);
-    }
-
-    .logo-eye::after {
-      content: "";
-      position: absolute;
-      top: 7px;
-      left: 7px;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #ffeb3b;
-      box-shadow: 0 0 8px rgba(255, 235, 59, 0.9);
-    }
-
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .logo-text-main {
-      font-family: "Cinzel", serif;
-      font-weight: 600;
-      font-size: 1.05rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .logo-text-sub {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.19em;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      font-size: 0.9rem;
-    }
-
-    .nav-links a {
-      position: relative;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-weight: 500;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      cursor: pointer;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -0.2rem;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--primary-soft));
-      border-radius: 999px;
-      transition: width 0.22s ease-out;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent-soft);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-cta {
-      padding: 0.45rem 1rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 236, 179, 0.6);
-      background: radial-gradient(circle at 20% 0, rgba(255, 236, 179, 0.15), transparent 55%),
-                  linear-gradient(145deg, rgba(183, 28, 28, 0.85), rgba(255, 179, 0, 0.9));
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-weight: 600;
-      color: #1b0202;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .nav-cta span.icon {
-      font-size: 1rem;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      cursor: pointer;
-    }
-
-    .hamburger span {
-      width: 22px;
-      height: 2px;
-      background: var(--accent-soft);
-      border-radius: 999px;
-    }
-
-    /* LAYOUT BASE */
-
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 1.5rem 1.5rem 3.5rem;
-    }
-
-    section {
-      margin-top: 3.5rem;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.15rem 0.65rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 236, 179, 0.4);
-      background: radial-gradient(circle at 10% 0, rgba(255, 236, 179, 0.2), transparent 55%),
-                  rgba(11, 3, 24, 0.85);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--accent-soft);
-    }
-
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 8px rgba(255, 179, 0, 0.9);
-    }
-
-    .section-title {
-      font-family: "Cinzel", serif;
-      font-size: 1.8rem;
-      margin-bottom: 0.7rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .section-subtitle {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      max-width: 480px;
-    }
-
-    /* HERO */
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      gap: 2rem;
-      align-items: center;
-      margin-top: 2rem;
-    }
-
-    .hero-title {
-      font-family: "Cinzel", serif;
-      font-size: clamp(2.1rem, 4vw, 2.9rem);
-      line-height: 1.04;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin: 1.2rem 0 0.8rem;
-    }
-
-    .hero-title span.highlight {
-      background: linear-gradient(90deg, #ffecb3, #ffb300, #e53935);
-      -webkit-background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 22px rgba(0, 0, 0, 0.75);
-    }
-
-    .hero-tagline {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      max-width: 520px;
-    }
-
-    .hero-tagline strong {
-      color: var(--accent-soft);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 1.3rem;
-    }
-
-    .btn-primary {
-      padding: 0.8rem 1.4rem;
-      border-radius: 999px;
-      border: none;
-      outline: none;
-      background: radial-gradient(circle at 10% 0, rgba(255, 236, 179, 0.25), transparent 60%),
-                  linear-gradient(135deg, var(--primary), var(--accent));
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: #200000;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      cursor: pointer;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.95);
-    }
-
-    .btn-secondary {
-      padding: 0.8rem 1.4rem;
-      border-radius: 999px;
-      border: 1px solid rgba(200, 184, 255, 0.4);
-      background: rgba(8, 3, 18, 0.85);
-      font-weight: 500;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      cursor: pointer;
-    }
-
-    .hero-note {
-      margin-top: 1.2rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .hero-note-icon {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 236, 179, 0.5);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      color: var(--accent-soft);
-    }
-
-    .hero-card {
-      border-radius: var(--radius-xl);
-      padding: 1.4rem 1.4rem 1.6rem;
-      background: linear-gradient(145deg, rgba(12, 4, 26, 0.98), rgba(33, 7, 54, 0.98));
-      border: 1px solid var(--border-soft);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      width: 230%;
-      height: 230%;
-      background:
-        radial-gradient(circle at 20% 0, rgba(255, 236, 179, 0.16), transparent 55%),
-        radial-gradient(circle at 80% 95%, rgba(229, 57, 53, 0.25), transparent 55%);
-      opacity: 0.9;
-      mix-blend-mode: screen;
-      top: -40%;
-      left: -60%;
-      pointer-events: none;
-    }
-
-    .hero-card-inner {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-card-title {
-      font-family: "Cinzel", serif;
-      font-size: 1.1rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
-
-    .hero-card-sub {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-
-    .hero-card-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.7rem;
-      font-size: 0.8rem;
-    }
-
-    .hero-pill {
-      padding: 0.45rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 236, 179, 0.35);
-      background: rgba(8, 3, 19, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .hero-moon {
-      margin-top: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.8rem;
-      color: var(--accent-soft);
-    }
-
-    .moon-icon {
-      width: 24px;
-      height: 24px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 236, 179, 0.6);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.95rem;
-      box-shadow: 0 0 16px rgba(255, 236, 179, 0.7);
-    }
-
-    /* SERVIÇOS */
-
-    .services-grid {
-      margin-top: 1.5rem;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.3rem;
-    }
-
-    .service-card {
-      border-radius: var(--radius-lg);
-      background: var(--bg-card);
-      border: 1px solid var(--border-soft);
-      padding: 1rem 1rem 1.1rem;
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .service-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 10% 0, rgba(255, 236, 179, 0.2), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.25s ease-out;
-    }
-
-    .service-card:hover::before {
-      opacity: 1;
-    }
-
-    .service-tag {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
-    }
-
-    .service-title {
-      font-family: "Cinzel", serif;
-      font-size: 1rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .service-desc {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.7rem;
-    }
-
-    .service-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.75rem;
-      color: var(--accent-soft);
-    }
-
-    .price-pill {
-      padding: 0.25rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(229, 57, 53, 0.6);
-      background: rgba(34, 5, 5, 0.9);
-      font-weight: 600;
-    }
-
-    /* SOBRE */
-
-    .about {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 1.7rem;
-      align-items: flex-start;
-    }
-
-    .about-text p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 0.7rem;
-    }
-
-    .about-highlight {
-      margin-top: 0.3rem;
-      padding: 0.7rem 0.8rem;
-      border-radius: var(--radius-lg);
-      border: 1px dashed rgba(255, 236, 179, 0.5);
-      background: rgba(6, 2, 10, 0.85);
-      font-size: 0.8rem;
-      color: var(--accent-soft);
-    }
-
-    .about-card {
-      border-radius: var(--radius-xl);
-      background: linear-gradient(145deg, rgba(11, 3, 24, 0.98), rgba(33, 7, 54, 0.98));
-      border: 1px solid var(--border-soft);
-      padding: 1.1rem 1rem;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .about-card-title {
-      font-family: "Cinzel", serif;
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .about-list {
-      list-style: none;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .about-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.4rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .about-list span.bullet {
-      font-size: 0.7rem;
-      color: var(--accent-soft);
-      margin-top: 0.1rem;
-    }
-
-    /* DEPOIMENTOS */
-
-    .testimonials {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .testimonial-card {
-      border-radius: var(--radius-lg);
-      background: rgba(5, 1, 12, 0.9);
-      border: 1px solid var(--border-soft);
-      padding: 0.9rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .testimonial-card::before {
-      content: "❝";
-      position: absolute;
-      font-size: 2.5rem;
-      opacity: 0.1;
-      top: -0.8rem;
-      right: 0.7rem;
-      color: var(--accent-soft);
-    }
-
-    .testimonial-name {
-      margin-top: 0.6rem;
-      font-weight: 600;
-      color: var(--accent-soft);
-    }
-
-    .testimonial-tag {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-    }
-
-    /* CONTATO */
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 1.7rem;
-      margin-top: 1.5rem;
-    }
-
-    .contact-card {
-      border-radius: var(--radius-xl);
-      background: linear-gradient(145deg, rgba(11, 3, 24, 0.98), rgba(33, 7, 54, 0.98));
-      border: 1px solid var(--border-soft);
-      padding: 1.2rem 1rem 1.3rem;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .contact-rows {
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-      font-size: 0.85rem;
-    }
-
-    .contact-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-      color: var(--text-muted);
-    }
-
-    .contact-label {
-      min-width: 70px;
-      font-weight: 600;
-      color: var(--accent-soft);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-    }
-
-    .whatsapp-btn {
-      margin-top: 0.9rem;
-      width: 100%;
-      justify-content: center;
-      font-size: 0.9rem;
-      background: radial-gradient(circle at 10% 0, rgba(255, 255, 255, 0.12), transparent 60%),
-                  linear-gradient(135deg, #25d366, #128c7e);
-      color: #020b04;
-    }
-
-    .whatsapp-btn .icon {
-      font-size: 1rem;
-    }
-
-    .contact-info {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 0.8rem;
-    }
-
-    .contact-form {
-      border-radius: var(--radius-lg);
-      background: rgba(6, 2, 10, 0.9);
-      border: 1px dashed rgba(200, 184, 255, 0.5);
-      padding: 1rem 0.9rem 1.1rem;
-      font-size: 0.85rem;
-    }
-
-    .form-row {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 0.7rem;
-    }
-
-    label {
-      font-size: 0.75rem;
-      margin-bottom: 0.2rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--text-muted);
-    }
-
-    input, textarea {
-      border-radius: 12px;
-      border: 1px solid rgba(200, 184, 255, 0.4);
-      background: rgba(8, 3, 19, 0.95);
-      color: var(--text-main);
-      padding: 0.55rem 0.7rem;
-      font-size: 0.85rem;
-      outline: none;
-      font-family: inherit;
-    }
-
-    input:focus, textarea:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(255, 179, 0, 0.4);
-    }
-
-    textarea {
-      min-height: 90px;
-      resize: vertical;
-    }
-
-    .form-helper {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      margin-top: 0.2rem;
-    }
-
-    .form-submit {
-      margin-top: 0.6rem;
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    /* RODAPÉ */
-
-    footer {
-      border-top: 1px solid var(--border-soft);
-      padding: 1.3rem 1.5rem 1.8rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 0.7rem;
-    }
-
-    footer strong {
-      color: var(--accent-soft);
-    }
-
-    /* ANIMAÇÕES SIMPLES */
-
-    .fade-in {
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* RESPONSIVO */
-
-    @media (max-width: 880px) {
-      .hero,
-      .about,
-      .contact-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .hero {
-        margin-top: 1.5rem;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .nav {
-        padding-inline: 1rem;
-      }
-
-      .nav-links {
-        position: absolute;
-        right: 1rem;
-        top: 56px;
-        flex-direction: column;
-        align-items: flex-end;
-        background: rgba(6, 2, 10, 0.97);
-        border-radius: 16px;
-        border: 1px solid var(--border-soft);
-        padding: 0.6rem 0.8rem 0.7rem;
-        display: none;
-      }
-
-      .nav-links.open {
-        display: flex;
-      }
-
-      .nav-cta {
-        display: none;
-      }
-
-      .hamburger {
-        display: flex;
-      }
-
-      .hero-card {
-        order: -1;
-      }
-
-      .services-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .testimonials {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      footer {
-        padding-inline: 1rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-title {
-        font-size: 1.9rem;
-      }
-    }
-
-  </style>
+-- =============================
+-- CRIAÇÃO DO BANCO
+-- =============================
+CREATE DATABASE IF NOT EXISTS pizzabot
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE pizzabot;
+
+-- (OPCIONAL) LIMPAR TABELAS SE JÁ EXISTIREM
+-- CUIDADO: ISSO APAGA DADOS ANTIGOS
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS 
+    pedido_pagamentos,
+    pedido_item_adicionais,
+    pedido_item_sabores,
+    pedido_itens,
+    pedidos,
+    configuracoes_atendimento,
+    chat_sessoes,
+    usuarios,
+    produtos_preco,
+    produtos,
+    categorias_produto,
+    formas_pagamento,
+    adicionais_preco,
+    adicionais,
+    sabores_pizza_preco,
+    sabores_pizza,
+    tamanhos_pizza,
+    enderecos,
+    clientes;
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- =============================
+-- TABELA: clientes
+-- =============================
+CREATE TABLE clientes (
+    id_cliente        INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nome              VARCHAR(120) NOT NULL,
+    telefone          VARCHAR(20)  NOT NULL,
+    email             VARCHAR(120),
+    criado_em         DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em     DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+    ativo             TINYINT(1) NOT NULL DEFAULT 1,
+    UNIQUE KEY uq_clientes_telefone (telefone)
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: enderecos (1 cliente -> N endereços)
+-- =============================
+CREATE TABLE enderecos (
+    id_endereco   INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_cliente    INT UNSIGNED NOT NULL,
+    apelido       VARCHAR(50) NULL,          -- ex: Casa, Trabalho
+    logradouro    VARCHAR(150) NOT NULL,
+    numero        VARCHAR(20)  NOT NULL,
+    complemento   VARCHAR(100),
+    bairro        VARCHAR(100),
+    cidade        VARCHAR(100) NOT NULL,
+    uf            CHAR(2)      NOT NULL,
+    cep           VARCHAR(10),
+    referencia    VARCHAR(150),
+    criado_em     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_enderecos_cliente
+        FOREIGN KEY (id_cliente)
+        REFERENCES clientes (id_cliente)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: tamanhos_pizza
+-- (P, M, G, brotinho etc.)
+-- =============================
+CREATE TABLE tamanhos_pizza (
+    id_tamanho    TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nome          VARCHAR(30) NOT NULL,      -- ex: "Pequena", "Média", "Grande"
+    diametro_cm   TINYINT UNSIGNED NULL,     -- opcional
+    fatias        TINYINT UNSIGNED NULL,     -- opcional
+    ativo         TINYINT(1) NOT NULL DEFAULT 1,
+    UNIQUE KEY uq_tamanhos_nome (nome)
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: sabores_pizza
+-- (sabor sem depender do tamanho)
+-- =============================
+CREATE TABLE sabores_pizza (
+    id_sabor      INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nome          VARCHAR(80) NOT NULL,      -- ex: Calabresa, Mussarela
+    descricao     VARCHAR(255),
+    categoria     VARCHAR(50) NULL,          -- ex: Tradicional, Especial, Doce
+    ativo         TINYINT(1) NOT NULL DEFAULT 1,
+    criado_em     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_sabores_nome (nome)
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: sabores_pizza_preco
+-- (tabela de preços por sabor X tamanho)
+-- =============================
+CREATE TABLE sabores_pizza_preco (
+    id_preco      INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_sabor      INT UNSIGNED NOT NULL,
+    id_tamanho    TINYINT UNSIGNED NOT NULL,
+    preco         DECIMAL(10,2) NOT NULL,
+    ativo         TINYINT(1) NOT NULL DEFAULT 1,
+    criado_em     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_preco_sabor
+        FOREIGN KEY (id_sabor)
+        REFERENCES sabores_pizza (id_sabor)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_preco_tamanho
+        FOREIGN KEY (id_tamanho)
+        REFERENCES tamanhos_pizza (id_tamanho)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+    UNIQUE KEY uq_preco_sabor_tamanho (id_sabor, id_tamanho)
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: adicionais
+-- (borda, maionese, extras em geral)
+-- =============================
+CREATE TABLE adicionais (
+    id_adicional   INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nome           VARCHAR(80) NOT NULL,      -- ex: Borda Cheddar, Maionese
+    tipo           ENUM('borda','molho','extra','outro') NOT NULL DEFAULT 'extra',
+    descricao      VARCHAR(255),
+    ativo          TINYINT(1) NOT NULL DEFAULT 1,
+    criado_em      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em  DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_adicionais_nome (nome)
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: adicionais_preco
+-- (preço do adicional por tamanho de pizza)
+-- =============================
+CREATE TABLE adicionais_preco (
+    id_adicional_preco INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_adicional       INT UNSIGNED NOT NULL,
+    id_tamanho         TINYINT UNSIGNED NOT NULL,
+    preco              DECIMAL(10,2) NOT NULL,
+    ativo              TINYINT(1) NOT NULL DEFAULT 1,
+    criado_em          DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em      DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_adic_preco_adic
+        FOREIGN KEY (id_adicional)
+        REFERENCES adicionais (id_adicional)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_adic_preco_tamanho
+        FOREIGN KEY (id_tamanho)
+        REFERENCES tamanhos_pizza (id_tamanho)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+    UNIQUE KEY uq_adic_tamanho (id_adicional, id_tamanho)
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: formas_pagamento
+-- =============================
+CREATE TABLE formas_pagamento (
+    id_forma_pagamento  TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nome                VARCHAR(40) NOT NULL,  -- Dinheiro, Pix, Cartão crédito...
+    aceita_online       TINYINT(1) NOT NULL DEFAULT 0, -- 0 = só presencial, 1 = também online
+    ativo               TINYINT(1) NOT NULL DEFAULT 1,
+    UNIQUE KEY uq_forma_pagamento_nome (nome)
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: categorias_produto
+-- (Pizza, Bebida, Lanche, Porção, Sobremesa, etc.)
+-- =============================
+CREATE TABLE categorias_produto (
+    id_categoria   TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nome           VARCHAR(50) NOT NULL,  -- ex: Pizza, Bebida, Lanche
+    tipo_base      ENUM('pizza','produto_simples') NOT NULL DEFAULT 'produto_simples',
+    ativo          TINYINT(1) NOT NULL DEFAULT 1,
+    UNIQUE KEY uq_categorias_nome (nome)
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: produtos
+-- (bebidas, lanches, porções, sobremesas, etc.)
+-- =============================
+CREATE TABLE produtos (
+    id_produto     INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_categoria   TINYINT UNSIGNED NOT NULL,
+    nome           VARCHAR(120) NOT NULL,
+    descricao      VARCHAR(255),
+    sku            VARCHAR(50),
+    ativo          TINYINT(1) NOT NULL DEFAULT 1,
+    criado_em      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em  DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_produto_categoria
+        FOREIGN KEY (id_categoria)
+        REFERENCES categorias_produto (id_categoria)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: produtos_preco
+-- (preço por produto + rótulo de tamanho/volume)
+-- =============================
+CREATE TABLE produtos_preco (
+    id_produto_preco INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_produto       INT UNSIGNED NOT NULL,
+    tamanho_label    VARCHAR(30) NULL,      -- ex: "Lata 350ml", "600ml", "Porção"
+    preco            DECIMAL(10,2) NOT NULL,
+    ativo            TINYINT(1) NOT NULL DEFAULT 1,
+    criado_em        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em    DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_prod_preco_prod
+        FOREIGN KEY (id_produto)
+        REFERENCES produtos (id_produto)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: usuarios (admin / atendente)
+-- =============================
+CREATE TABLE usuarios (
+    id_usuario   INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nome         VARCHAR(120) NOT NULL,
+    email        VARCHAR(120) NOT NULL,
+    senha_hash   VARCHAR(255) NOT NULL,
+    perfil       ENUM('admin','gerente','atendente') NOT NULL DEFAULT 'atendente',
+    ativo        TINYINT(1) NOT NULL DEFAULT 1,
+    criado_em    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_usuarios_email (email)
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: chat_sessoes
+-- (associa um pedido a uma conversa do chatbot)
+-- =============================
+CREATE TABLE chat_sessoes (
+    id_chat_sessao      INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    canal               VARCHAR(30) NOT NULL DEFAULT 'web',   -- web, whatsapp, instagram...
+    identificador_externo VARCHAR(100) NULL,                  -- id da sessão no provedor (ex: id WhatsApp)
+    id_cliente          INT UNSIGNED NULL,
+    estado_atual        VARCHAR(50) NULL,                     -- etapa do fluxo
+    iniciado_em         DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    encerrado_em        DATETIME NULL,
+    ultimo_evento_em    DATETIME NULL,
+
+    CONSTRAINT fk_chat_cliente
+        FOREIGN KEY (id_cliente)
+        REFERENCES clientes (id_cliente)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: configuracoes_atendimento
+-- (horário de funcionamento / entrega / retirada)
+-- =============================
+CREATE TABLE configuracoes_atendimento (
+    id_config      INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    dia_semana     TINYINT UNSIGNED NOT NULL,  -- 0=Domingo ... 6=Sábado
+    hora_abre      TIME NOT NULL,
+    hora_fecha     TIME NOT NULL,
+    entrega_ativa  TINYINT(1) NOT NULL DEFAULT 1,
+    retirada_ativa TINYINT(1) NOT NULL DEFAULT 1,
+    criado_em      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: pedidos
+-- =============================
+CREATE TABLE pedidos (
+    id_pedido            INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_cliente           INT UNSIGNED NOT NULL,
+    id_endereco          INT UNSIGNED NOT NULL,
+    id_chat_sessao       INT UNSIGNED NULL,
+    id_usuario_atendente INT UNSIGNED NULL, -- quem tratou no sistema web
+
+    -- tipo de pedido (entrega x retirada)
+    tipo_pedido         ENUM('entrega','retirada') NOT NULL DEFAULT 'entrega',
+
+    -- origem: whastapp, balcão, telefone, etc.
+    origem              ENUM('whatsapp','balcao','telefone','site','ifood','outro')
+                        NOT NULL DEFAULT 'whatsapp',
+
+    status              ENUM('novo','em_preparo','a_caminho','entregue','cancelado')
+                        NOT NULL DEFAULT 'novo',
+    observacoes         VARCHAR(255) NULL,
+
+    subtotal            DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    taxa_entrega        DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    desconto            DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+    total               DECIMAL(10,2) NOT NULL DEFAULT 0.00,
+
+    criado_em           DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em       DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_pedidos_cliente
+        FOREIGN KEY (id_cliente)
+        REFERENCES clientes (id_cliente)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+    CONSTRAINT fk_pedidos_endereco
+        FOREIGN KEY (id_endereco)
+        REFERENCES enderecos (id_endereco)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+    CONSTRAINT fk_pedidos_chat_sessao
+        FOREIGN KEY (id_chat_sessao)
+        REFERENCES chat_sessoes (id_chat_sessao)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL,
+
+    CONSTRAINT fk_pedidos_usuario
+        FOREIGN KEY (id_usuario_atendente)
+        REFERENCES usuarios (id_usuario)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: pedido_itens
+-- (uma linha do pedido: pizza OU produto simples)
+-- =============================
+CREATE TABLE pedido_itens (
+    id_pedido_item      INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_pedido           INT UNSIGNED NOT NULL,
+
+    -- Para produtos simples (bebidas, lanches, porções, sobremesas)
+    id_produto          INT UNSIGNED NULL,
+
+    -- Para pizza, usamos tamanhos_pizza; para produto simples pode ficar NULL
+    id_tamanho          TINYINT UNSIGNED NULL,
+
+    quantidade          TINYINT UNSIGNED NOT NULL DEFAULT 1,
+
+    -- preço base da unidade (pizza ou produto simples, sem adicionais)
+    preco_unitario      DECIMAL(10,2) NOT NULL,
+
+    -- total do item = (preco_unitario + adicionais) * quantidade
+    total_item          DECIMAL(10,2) NOT NULL,
+
+    observacao          VARCHAR(255) NULL,
+
+    CONSTRAINT fk_item_pedido
+        FOREIGN KEY (id_pedido)
+        REFERENCES pedidos (id_pedido)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_item_tamanho
+        FOREIGN KEY (id_tamanho)
+        REFERENCES tamanhos_pizza (id_tamanho)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+
+    CONSTRAINT fk_item_produto
+        FOREIGN KEY (id_produto)
+        REFERENCES produtos (id_produto)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: pedido_item_sabores
+-- (1, 2, 3 sabores por pizza)
+-- =============================
+CREATE TABLE pedido_item_sabores (
+    id_pedido_item_sabor INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_pedido_item       INT UNSIGNED NOT NULL,
+    id_sabor             INT UNSIGNED NOT NULL,
+    proporcao            DECIMAL(5,2) NOT NULL DEFAULT 1.00, 
+                           -- 1.00 = sabor único, 0.50 = metade, 0.33 = 1/3 etc.
+
+    CONSTRAINT fk_item_sabor_item
+        FOREIGN KEY (id_pedido_item)
+        REFERENCES pedido_itens (id_pedido_item)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_item_sabor_sabor
+        FOREIGN KEY (id_sabor)
+        REFERENCES sabores_pizza (id_sabor)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: pedido_item_adicionais
+-- (borda, maionese, extras por item)
+-- =============================
+CREATE TABLE pedido_item_adicionais (
+    id_pedido_item_adicional INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_pedido_item           INT UNSIGNED NOT NULL,
+    id_adicional             INT UNSIGNED NOT NULL,
+    quantidade               TINYINT UNSIGNED NOT NULL DEFAULT 1,
+    valor_unitario           DECIMAL(10,2) NOT NULL,
+    valor_total              DECIMAL(10,2) NOT NULL,
+
+    CONSTRAINT fk_pitem_adic_item
+        FOREIGN KEY (id_pedido_item)
+        REFERENCES pedido_itens (id_pedido_item)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_pitem_adic_adicional
+        FOREIGN KEY (id_adicional)
+        REFERENCES adicionais (id_adicional)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
+-- =============================
+-- TABELA: pedido_pagamentos
+-- (mais de uma forma de pagamento por pedido)
+-- =============================
+CREATE TABLE pedido_pagamentos (
+    id_pedido_pagamento INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_pedido           INT UNSIGNED NOT NULL,
+    id_forma_pagamento  TINYINT UNSIGNED NOT NULL,
+    valor               DECIMAL(10,2) NOT NULL,
+    status              ENUM('pendente','aprovado','recusado','estornado')
+                        NOT NULL DEFAULT 'pendente',
+    codigo_transacao    VARCHAR(100) NULL,      -- id no gateway de pagamento
+    criado_em           DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_pag_pedido
+        FOREIGN KEY (id_pedido)
+        REFERENCES pedidos (id_pedido)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_pag_forma
+        FOREIGN KEY (id_forma_pagamento)
+        REFERENCES formas_pagamento (id_forma_pagamento)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+) ENGINE=InnoDB;
+
+-- =============================
+-- DADOS DE EXEMPLO
+-- =============================
+
+-- Tamanhos de pizza
+INSERT INTO tamanhos_pizza (nome, diametro_cm, fatias) VALUES
+('Pequena', 25, 4),
+('Média',   30, 6),
+('Grande',  35, 8);
+
+-- Sabores de pizza
+INSERT INTO sabores_pizza (nome, descricao, categoria) VALUES
+('Mussarela', 'Queijo mussarela e orégano', 'Tradicional'),
+('Calabresa', 'Calabresa fatiada com cebola', 'Tradicional'),
+('Portuguesa', 'Presunto, ovos, cebola, pimentão e ervilha', 'Tradicional'),
+('Frango com Catupiry', 'Frango desfiado com catupiry', 'Especial');
+
+INSERT INTO sabores_pizza_preco (id_sabor, id_tamanho, preco) VALUES
+-- Mussarela
+(1, 1, 30.00),
+(1, 2, 35.00),
+(1, 3, 40.00),
+-- Calabresa
+(2, 1, 32.00),
+(2, 2, 37.00),
+(2, 3, 42.00),
+-- Portuguesa
+(3, 1, 34.00),
+(3, 2, 39.00),
+(3, 3, 45.00),
+-- Frango com Catupiry
+(4, 1, 36.00),
+(4, 2, 41.00),
+(4, 3, 48.00);
+
+-- Formas de pagamento
+INSERT INTO formas_pagamento (nome, aceita_online) VALUES
+('Dinheiro', 0),
+('Cartão de Crédito', 1),
+('Cartão de Débito', 1),
+('Pix', 1);
+
+-- Categorias de produto
+INSERT INTO categorias_produto (nome, tipo_base) VALUES
+('Pizza', 'pizza'),
+('Bebida', 'produto_simples'),
+('Lanche', 'produto_simples'),
+('Porção', 'produto_simples');
+
+-- Produtos (bebidas, lanches, porção)
+INSERT INTO produtos (id_categoria, nome, descricao) VALUES
+(2, 'Coca-Cola', 'Refrigerante Coca-Cola'),
+(2, 'Guaraná',   'Refrigerante Guaraná'),
+(3, 'X-Salada',  'Hambúrguer com salada'),
+(4, 'Batata Frita', 'Porção de batata frita');
+
+INSERT INTO produtos_preco (id_produto, tamanho_label, preco) VALUES
+(1, 'Lata 350ml', 6.00),
+(1, '600ml',      9.00),
+(2, 'Lata 350ml', 5.50),
+(3, 'Único',     18.00),
+(4, '300g',      20.00);
+
+-- Adicionais (bordas e maionese)
+INSERT INTO adicionais (nome, tipo, descricao) VALUES
+('Borda Cheddar', 'borda', 'Borda recheada com queijo cheddar'),
+('Borda Catupiry', 'borda', 'Borda recheada com catupiry'),
+('Maionese', 'molho', 'Sachê de maionese tradicional'),
+('Maionese Temperada', 'molho', 'Maionese temperada da casa');
+
+INSERT INTO adicionais_preco (id_adicional, id_tamanho, preco) VALUES
+-- Borda Cheddar
+(1, 1, 5.00),
+(1, 2, 6.00),
+(1, 3, 7.00),
+-- Borda Catupiry
+(2, 1, 5.00),
+(2, 2, 6.00),
+(2, 3, 7.00),
+-- Maionese
+(3, 1, 1.50),
+(3, 2, 1.50),
+(3, 3, 1.50),
+-- Maionese Temperada
+(4, 1, 2.00),
+(4, 2, 2.00),
+(4, 3, 2.00);
+
+-- Usuário admin padrão (troque o hash depois)
+INSERT INTO usuarios (nome, email, senha_hash, perfil, ativo)
+VALUES ('Administrador', 'admin@pizzabot.local', 'TROCAR-PELO-HASH', 'admin', 1);
+
+-- Horário de atendimento (exemplo: todos os dias 18h–23h; fds até 23h59)
+INSERT INTO configuracoes_atendimento (dia_semana, hora_abre, hora_fecha, entrega_ativa, retirada_ativa)
+VALUES
+(0, '18:00:00', '23:00:00', 1, 1),
+(1, '18:00:00', '23:00:00', 1, 1),
+(2, '18:00:00', '23:00:00', 1, 1),
+(3, '18:00:00', '23:00:00', 1, 1),
+(4, '18:00:00', '23:59:00', 1, 1),
+(5, '18:00:00', '23:59:00', 1, 1),
+(6, '18:00:00', '23:00:00', 1, 1);
