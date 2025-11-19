@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ana Carla • Oráculos & Macumbaria</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ana Carla - Consulta espiritual, macumbaria, oráculos, abertura de caminhos e proteção.">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-main: #06020a;
+      --bg-alt: #100618;
+      --bg-card: rgba(11, 3, 24, 0.9);
+      --primary: #b71c1c;   /* vermelho ritual */
+      --primary-soft: #e53935;
+      --accent: #ffb300;    /* dourado */
+      --accent-soft: #ffecb3;
+      --violet: #7b1fa2;
+      --text-main: #fefaf4;
+      --text-muted: #c8b8ff;
+      --border-soft: rgba(255, 255, 255, 0.08);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.7);
+      --radius-xl: 22px;
+      --radius-lg: 16px;
+      --glass-blur: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 10% 0, rgba(183, 28, 28, 0.45), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(123, 31, 162, 0.45), transparent 50%),
+        radial-gradient(circle at 10% 100%, rgba(255, 179, 0, 0.3), transparent 55%),
+        var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Overlay místico com símbolos */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.06) 0, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.04) 0, transparent 50%);
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* HEADER / NAV */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(var(--glass-blur));
+      background: linear-gradient(to right, rgba(6, 2, 10, 0.98), rgba(11, 3, 24, 0.95));
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.7rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #fff4, transparent),
+                  radial-gradient(circle at 70% 80%, #ffb30022, transparent),
+                  linear-gradient(145deg, #2d0b3a, #6a1b9a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-icon::before {
+      content: "";
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      border-radius: inherit;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      mix-blend-mode: screen;
+    }
+
+    .logo-eye {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 236, 179, 0.95);
+      position: relative;
+      box-shadow: 0 0 12px rgba(255, 236, 179, 0.6);
+    }
+
+    .logo-eye::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      border: 2px solid rgba(183, 28, 28, 0.9);
+    }
+
+    .logo-eye::after {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 7px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ffeb3b;
+      box-shadow: 0 0 8px rgba(255, 235, 59, 0.9);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-text-main {
+      font-family: "Cinzel", serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .logo-text-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.19em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 500;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.2rem;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--primary-soft));
+      border-radius: 999px;
+      transition: width 0.22s ease-out;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-soft);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 236, 179, 0.6);
+      background: radial-gradient(circle at 20% 0, rgba(255, 236, 179, 0.15), transparent 55%),
+                  linear-gradient(145deg, rgba(183, 28, 28, 0.85), rgba(255, 179, 0, 0.9));
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 600;
+      color: #1b0202;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav-cta span.icon {
+      font-size: 1rem;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 22px;
+      height: 2px;
+      background: var(--accent-soft);
+      border-radius: 999px;
+    }
+
+    /* LAYOUT BASE */
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 3.5rem;
+    }
+
+    section {
+      margin-top: 3.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.15rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 236, 179, 0.4);
+      background: radial-gradient(circle at 10% 0, rgba(255, 236, 179, 0.2), transparent 55%),
+                  rgba(11, 3, 24, 0.85);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-soft);
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px rgba(255, 179, 0, 0.9);
+    }
+
+    .section-title {
+      font-family: "Cinzel", serif;
+      font-size: 1.8rem;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      max-width: 480px;
+    }
+
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .hero-title {
+      font-family: "Cinzel", serif;
+      font-size: clamp(2.1rem, 4vw, 2.9rem);
+      line-height: 1.04;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin: 1.2rem 0 0.8rem;
+    }
+
+    .hero-title span.highlight {
+      background: linear-gradient(90deg, #ffecb3, #ffb300, #e53935);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 22px rgba(0, 0, 0, 0.75);
+    }
+
+    .hero-tagline {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 520px;
+    }
+
+    .hero-tagline strong {
+      color: var(--accent-soft);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.3rem;
+    }
+
+    .btn-primary {
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      outline: none;
+      background: radial-gradient(circle at 10% 0, rgba(255, 236, 179, 0.25), transparent 60%),
+                  linear-gradient(135deg, var(--primary), var(--accent));
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #200000;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.95);
+    }
+
+    .btn-secondary {
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(200, 184, 255, 0.4);
+      background: rgba(8, 3, 18, 0.85);
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+    }
+
+    .hero-note {
+      margin-top: 1.2rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .hero-note-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 236, 179, 0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--accent-soft);
+    }
+
+    .hero-card {
+      border-radius: var(--radius-xl);
+      padding: 1.4rem 1.4rem 1.6rem;
+      background: linear-gradient(145deg, rgba(12, 4, 26, 0.98), rgba(33, 7, 54, 0.98));
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 230%;
+      height: 230%;
+      background:
+        radial-gradient(circle at 20% 0, rgba(255, 236, 179, 0.16), transparent 55%),
+        radial-gradient(circle at 80% 95%, rgba(229, 57, 53, 0.25), transparent 55%);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+      top: -40%;
+      left: -60%;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-card-title {
+      font-family: "Cinzel", serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-card-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .hero-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+      font-size: 0.8rem;
+    }
+
+    .hero-pill {
+      padding: 0.45rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 236, 179, 0.35);
+      background: rgba(8, 3, 19, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero-moon {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--accent-soft);
+    }
+
+    .moon-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 236, 179, 0.6);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      box-shadow: 0 0 16px rgba(255, 236, 179, 0.7);
+    }
+
+    /* SERVIÇOS */
+
+    .services-grid {
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.3rem;
+    }
+
+    .service-card {
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 1rem 1rem 1.1rem;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 10% 0, rgba(255, 236, 179, 0.2), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.25s ease-out;
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .service-title {
+      font-family: "Cinzel", serif;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .service-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .service-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--accent-soft);
+    }
+
+    .price-pill {
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(229, 57, 53, 0.6);
+      background: rgba(34, 5, 5, 0.9);
+      font-weight: 600;
+    }
+
+    /* SOBRE */
+
+    .about {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 1.7rem;
+      align-items: flex-start;
+    }
+
+    .about-text p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .about-highlight {
+      margin-top: 0.3rem;
+      padding: 0.7rem 0.8rem;
+      border-radius: var(--radius-lg);
+      border: 1px dashed rgba(255, 236, 179, 0.5);
+      background: rgba(6, 2, 10, 0.85);
+      font-size: 0.8rem;
+      color: var(--accent-soft);
+    }
+
+    .about-card {
+      border-radius: var(--radius-xl);
+      background: linear-gradient(145deg, rgba(11, 3, 24, 0.98), rgba(33, 7, 54, 0.98));
+      border: 1px solid var(--border-soft);
+      padding: 1.1rem 1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .about-card-title {
+      font-family: "Cinzel", serif;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .about-list {
+      list-style: none;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .about-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .about-list span.bullet {
+      font-size: 0.7rem;
+      color: var(--accent-soft);
+      margin-top: 0.1rem;
+    }
+
+    /* DEPOIMENTOS */
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .testimonial-card {
+      border-radius: var(--radius-lg);
+      background: rgba(5, 1, 12, 0.9);
+      border: 1px solid var(--border-soft);
+      padding: 0.9rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonial-card::before {
+      content: "❝";
+      position: absolute;
+      font-size: 2.5rem;
+      opacity: 0.1;
+      top: -0.8rem;
+      right: 0.7rem;
+      color: var(--accent-soft);
+    }
+
+    .testimonial-name {
+      margin-top: 0.6rem;
+      font-weight: 600;
+      color: var(--accent-soft);
+    }
+
+    .testimonial-tag {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* CONTATO */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.7rem;
+      margin-top: 1.5rem;
+    }
+
+    .contact-card {
+      border-radius: var(--radius-xl);
+      background: linear-gradient(145deg, rgba(11, 3, 24, 0.98), rgba(33, 7, 54, 0.98));
+      border: 1px solid var(--border-soft);
+      padding: 1.2rem 1rem 1.3rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .contact-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      font-size: 0.85rem;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      color: var(--text-muted);
+    }
+
+    .contact-label {
+      min-width: 70px;
+      font-weight: 600;
+      color: var(--accent-soft);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .whatsapp-btn {
+      margin-top: 0.9rem;
+      width: 100%;
+      justify-content: center;
+      font-size: 0.9rem;
+      background: radial-gradient(circle at 10% 0, rgba(255, 255, 255, 0.12), transparent 60%),
+                  linear-gradient(135deg, #25d366, #128c7e);
+      color: #020b04;
+    }
+
+    .whatsapp-btn .icon {
+      font-size: 1rem;
+    }
+
+    .contact-info {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.8rem;
+    }
+
+    .contact-form {
+      border-radius: var(--radius-lg);
+      background: rgba(6, 2, 10, 0.9);
+      border: 1px dashed rgba(200, 184, 255, 0.5);
+      padding: 1rem 0.9rem 1.1rem;
+      font-size: 0.85rem;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0.7rem;
+    }
+
+    label {
+      font-size: 0.75rem;
+      margin-bottom: 0.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+    }
+
+    input, textarea {
+      border-radius: 12px;
+      border: 1px solid rgba(200, 184, 255, 0.4);
+      background: rgba(8, 3, 19, 0.95);
+      color: var(--text-main);
+      padding: 0.55rem 0.7rem;
+      font-size: 0.85rem;
+      outline: none;
+      font-family: inherit;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(255, 179, 0, 0.4);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .form-helper {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .form-submit {
+      margin-top: 0.6rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* RODAPÉ */
+
+    footer {
+      border-top: 1px solid var(--border-soft);
+      padding: 1.3rem 1.5rem 1.8rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.7rem;
+    }
+
+    footer strong {
+      color: var(--accent-soft);
+    }
+
+    /* ANIMAÇÕES SIMPLES */
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVO */
+
+    @media (max-width: 880px) {
+      .hero,
+      .about,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        margin-top: 1.5rem;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        padding-inline: 1rem;
+      }
+
+      .nav-links {
+        position: absolute;
+        right: 1rem;
+        top: 56px;
+        flex-direction: column;
+        align-items: flex-end;
+        background: rgba(6, 2, 10, 0.97);
+        border-radius: 16px;
+        border: 1px solid var(--border-soft);
+        padding: 0.6rem 0.8rem 0.7rem;
+        display: none;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero-card {
+        order: -1;
+      }
+
+      .services-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .testimonials {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      footer {
+        padding-inline: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.9rem;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <div class="logo-eye"></div>
+        </div>
+        <div class="logo-text">
+          <div class="logo-text-main">Ana&nbsp;Carla</div>
+          <div class="logo-text-sub">ORÁCULOS & MACUMBARIA</div>
+        </div>
+      </div>
+
+      <nav class="nav-links" id="navLinks">
+        <a data-scroll="#hero">Início</a>
+        <a data-scroll="#servicos">Trabalhos</a>
+        <a data-scroll="#sobre">Sobre</a>
+        <a data-scroll="#contato">Contato</a>
+      </nav>
+
+      <button class="nav-cta" id="navWhatsapp">
+        <span class="icon">✦</span>
+        WhatsApp
+      </button>
+
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <div class="fade-in">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          CONSULTA ESPIRITUAL • À DISTÂNCIA E PRESENCIAL
+        </div>
+
+        <h1 class="hero-title">
+          <span class="highlight">Ana&nbsp;Carla</span><br />
+          macumbaria, oráculos<br />& abertura de caminhos
+        </h1>
+
+        <p class="hero-tagline">
+          Trabalhos firmes na linha da <strong>macumbaria de raiz</strong>, jogo de búzios, cartas e firmezas
+          espirituais para amor, proteção, prosperidade e justiça.
+        </p>
+
+        <div class="hero-actions">
+          <!-- Substitua o número do WhatsApp abaixo -->
+          <a href="https://wa.me/5599999999999?text=Olá%20Ana%20Carla%2C%20quero%20agendar%20uma%20consulta%20espiritual."
+             target="_blank" rel="noopener" class="btn-primary">
+            <span>Agendar consulta</span>
+            <span>✉</span>
+          </a>
+
+          <button class="btn-secondary" data-scroll="#servicos">
+            <span>Ver trabalhos</span>
+            <span>☾</span>
+          </button>
+        </div>
+
+        <div class="hero-note">
+          <div class="hero-note-icon">✦</div>
+          <span>
+            Atendimento discreto e respeitoso. Nada é feito sem o seu consentimento e sem antes jogar para ver.
+          </span>
+        </div>
+      </div>
+
+      <aside class="hero-card fade-in">
+        <div class="hero-card-inner">
+          <h2 class="hero-card-title">Leitura & Firmes</h2>
+          <p class="hero-card-sub">
+            Cada caso é um caso. Primeiro abrimos os caminhos no jogo para entender o que a espiritualidade pede.
+          </p>
+
+          <div class="hero-card-grid">
+            <div class="hero-pill">Jogo de búzios & cartas</div>
+            <div class="hero-pill">Trabalhos de amor</div>
+            <div class="hero-pill">Proteção & limpeza</div>
+            <div class="hero-pill">Abertura de caminhos</div>
+          </div>
+
+          <div class="hero-moon">
+            <div class="moon-icon">☽</div>
+            <span>Atendimento com hora marcada, sopro de fé e mão firme na encruzilhada certa.</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="fade-in">
+      <div class="badge">
+        ✦ Trabalhos & consultas
+      </div>
+      <h2 class="section-title">O que Ana&nbsp;Carla faz</h2>
+      <p class="section-subtitle">
+        Cada trabalho é orientado pelo jogo e firmado na linha certa. Respeito às entidades, à sua fé e ao seu tempo.
+      </p>
+
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-tag">Consulta completa</div>
+          <h3 class="service-title">Jogo de búzios & cartas</h3>
+          <p class="service-desc">
+            Abertura completa para ver amor, vida, finanças, saúde espiritual, inveja, feitiços e caminhos travados.
+          </p>
+          <div class="service-meta">
+            <span>Duração média: 40–60 min</span>
+            <span class="price-pill">Valor sob consulta</span>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-tag">Amor & união</div>
+          <h3 class="service-title">Trabalhos de amarração</h3>
+          <p class="service-desc">
+            Amarração amorosa, adoçamento, firmeza para casal e retorno. Sempre alinhado ao que o oráculo permite.
+          </p>
+          <div class="service-meta">
+            <span>Consulta obrigatória antes</span>
+            <span class="price-pill">Avaliação no jogo</span>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-tag">Fechamento de corpo</div>
+          <h3 class="service-title">Limpeza & proteção</h3>
+          <p class="service-desc">
+            Limpeza espiritual, corte de demandas, proteção contra olho gordo, inveja, magia feita e injustiças.
+          </p>
+          <div class="service-meta">
+            <span>Trabalhos à distância ou no terreiro</span>
+            <span class="price-pill">Plano individual</span>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-tag">Prosperidade</div>
+          <h3 class="service-title">Abertura de caminhos</h3>
+          <p class="service-desc">
+            Firmezas para abrir seus caminhos em negócios, trabalho, vendas e oportunidades que parecem não andar.
+          </p>
+          <div class="service-meta">
+            <span>Banhos, oferendas & firmezas</span>
+            <span class="price-pill">Conforme o caso</span>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-tag">Defesa</div>
+          <h3 class="service-title">Quebra de feitiço</h3>
+          <p class="service-desc">
+            Corte de amarrações, trabalhos feitos, magia pesada e qualquer energia que esteja te prendendo.
+          </p>
+          <div class="service-meta">
+            <span>Trabalho sério e sigiloso</span>
+            <span class="price-pill">Definido no jogo</span>
+          </div>
+        </article>
+
+        <article class="service-card">
+          <div class="service-tag">Caminho certo</div>
+          <h3 class="service-title">Aconselhamento espiritual</h3>
+          <p class="service-desc">
+            Orientação sobre decisões importantes, relacionamentos, mudanças de vida e escolhas que pedem calma.
+          </p>
+          <div class="service-meta">
+            <span>Atendimento online ou presencial</span>
+            <span class="price-pill">Valor acessível</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre" class="fade-in">
+      <div class="about">
+        <div class="about-text">
+          <div class="badge">
+            ☾ sobre ana carla
+          </div>
+          <h2 class="section-title">Mão firme na macumbaria</h2>
+          <p>
+            Ana Carla trabalha na linha da macumbaria de raiz, com respeito às entidades e à força que vem da rua,
+            da encruzilhada, da mata e da praia. Nada é feito de qualquer jeito. Primeiro se joga, se entende, se
+            conversa — depois se firma.
+          </p>
+          <p>
+            Com anos de experiência em <strong>oráculos, firmezas e trabalhos de abertura de caminho</strong>, Ana
+            Carla atende quem busca resposta, justiça, amor, proteção ou apenas um norte quando nada parece fazer
+            sentido.
+          </p>
+          <p>
+            Aqui não tem promessa vazia. Tem trabalho sério, pé no chão e respeito à espiritualidade e ao seu livre-arbítrio.
+          </p>
+
+          <div class="about-highlight">
+            ✦ Cada caso é visto com carinho e verdade. Se o jogo disser que não é o momento, Ana Carla fala na lata.
+          </div>
+        </div>
+
+        <aside class="about-card">
+          <h3 class="about-card-title">Como é o atendimento?</h3>
+          <ul class="about-list">
+            <li>
+              <span class="bullet">✦</span>
+              <span><strong>1. Jogo aberto</strong> — primeiro abrimos o jogo para ver tudo que precisa ser visto.</span>
+            </li>
+            <li>
+              <span class="bullet">✦</span>
+              <span><strong>2. Orientação clara</strong> — é explicado o que está pegando e o que a espiritualidade pede.</span>
+            </li>
+            <li>
+              <span class="bullet">✦</span>
+              <span><strong>3. Caminho sugerido</strong> — se houver necessidade de trabalho, é apresentado com valor e detalhe.</span>
+            </li>
+            <li>
+              <span class="bullet">✦</span>
+              <span><strong>4. Acompanhamento</strong> — depois do trabalho, tem retorno pra ver como as coisas caminham.</span>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="fade-in">
+      <div class="badge">
+        ✦ quem já passou pela mesa
+      </div>
+      <h2 class="section-title">Depoimentos de clientes</h2>
+
+      <div class="testimonials">
+        <article class="testimonial-card">
+          <p>
+            "Eu estava com a vida travada em tudo. No jogo, Ana viu coisas que ninguém sabia. Depois da limpeza e da
+            firmeza, senti leveza na mesma semana."
+          </p>
+          <div class="testimonial-name">Mariana S.</div>
+          <div class="testimonial-tag">Limpeza & abertura de caminhos</div>
+        </article>
+
+        <article class="testimonial-card">
+          <p>
+            "Vim querendo amarração, mas no jogo vimos que não era isso. Ela falou a verdade, me orientou e fiz um
+            trabalho de caminho pra mim. Hoje agradeço."
+          </p>
+          <div class="testimonial-name">Carlos R.</div>
+          <div class="testimonial-tag">Consulta & aconselhamento</div>
+        </article>
+
+        <article class="testimonial-card">
+          <p>
+            "Não gosto de ilusão. Ana foi direta, explicou tudo, fez o trabalho e me acompanhou depois. Coisas que
+            estavam travadas começaram a andar."
+          </p>
+          <div class="testimonial-name">Jéssica L.</div>
+          <div class="testimonial-tag">Trabalho de prosperidade</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="fade-in">
+      <div class="badge">
+        ✦ contato
+      </div>
+      <h2 class="section-title">Agende com Ana&nbsp;Carla</h2>
+      <p class="section-subtitle">
+        Entre em contato pelo WhatsApp para valores, horários e tipos de atendimento. Mensagens são respondidas por ordem de chegada.
+      </p>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-rows">
+            <div class="contact-row">
+              <div class="contact-label">WhatsApp</div>
+              <!-- Troque para o número real -->
+              <div>
+                <a href="https://wa.me/5599999999999?text=Olá%20Ana%20Carla%2C%20vim%20pelo%20site%20e%20quero%20informações%20sobre%20consulta."
+                   target="_blank" rel="noopener">
+                  +55 (99) 99999-9999
+                </a>
+                <div class="form-helper">
+                  Clique para abrir a conversa automaticamente.
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-row">
+              <div class="contact-label">Atendimento</div>
+              <div>
+                Online (vídeo/áudio) e presencial sob agendamento prévio.<br />
+                Horários flexíveis: de acordo com o movimento da casa e da rua.
+              </div>
+            </div>
+
+            <div class="contact-row">
+              <div class="contact-label">Cidade</div>
+              <div>
+                Sua cidade aqui – Terreiro / local de atendimento informado após agendamento.
+              </div>
+            </div>
+          </div>
+
+          <a href="https://wa.me/5599999999999?text=Olá%20Ana%20Carla%2C%20quero%20agendar%20uma%20consulta%20espiritual."
+             target="_blank" rel="noopener" class="btn-primary whatsapp-btn">
+            <span class="icon">🕯</span>
+            <span>Falar agora no WhatsApp</span>
+          </a>
+
+          <p class="contact-info">
+            Não faça depósitos sem falar diretamente com Ana Carla. Trabalhos são combinados pela consulta e explicados com clareza.
+          </p>
+        </div>
+
+        <div class="contact-form">
+          <h3 style="font-family: 'Cinzel', serif; font-size: 0.95rem; margin-bottom: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;">
+            Deixe sua intenção
+          </h3>
+
+          <form id="intencaoForm">
+            <div class="form-row">
+              <label for="nome">Seu nome</label>
+              <input type="text" id="nome" name="nome" placeholder="Como devo te chamar?" />
+            </div>
+
+            <div class="form-row">
+              <label for="contato">Contato</label>
+              <input type="text" id="contato" name="contato" placeholder="WhatsApp ou e-mail" />
+            </div>
+
+            <div class="form-row">
+              <label for="assunto">O que te trouxe até aqui?</label>
+              <textarea id="assunto" name="assunto" placeholder="Amor, finanças, proteção, limpeza, abertura de caminhos..."></textarea>
+              <div class="form-helper">
+                Este formulário é apenas ilustrativo. Para resposta rápida, use o botão de WhatsApp ao lado.
+              </div>
+            </div>
+
+            <div class="form-submit">
+              <button type="button" class="btn-secondary" id="fakeSubmit">
+                Enviar intenção
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>
+      © <span id="year"></span> <strong>Ana&nbsp;Carla • Oráculos & Macumbaria</strong>. Todos os direitos reservados.
+    </div>
+    <div>
+      Site criado para apresentação espiritual. Trabalhos são feitos com respeito e responsabilidade.
+    </div>
+  </footer>
+
+  <script>
+    // Ano automático no rodapé
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Scroll suave ao clicar no menu / botões
+    function smoothScrollTo(selector) {
+      const el = document.querySelector(selector);
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+
+    document.querySelectorAll("[data-scroll]").forEach(link => {
+      link.addEventListener("click", () => {
+        const target = link.getAttribute("data-scroll");
+        smoothScrollTo(target);
+
+        // Fecha menu mobile
+        const nav = document.getElementById("navLinks");
+        if (nav.classList.contains("open")) nav.classList.remove("open");
+      });
+    });
+
+    // Botão de WhatsApp no topo
+    document.getElementById("navWhatsapp").addEventListener("click", () => {
+      window.open("https://wa.me/5599999999999?text=Olá%20Ana%20Carla%2C%20quero%20agendar%20uma%20consulta.", "_blank");
+    });
+
+    // Menu hambúrguer (mobile)
+    document.getElementById("hamburger").addEventListener("click", () => {
+      const nav = document.getElementById("navLinks");
+      nav.classList.toggle("open");
+    });
+
+    // Animação fade-in ao rolar
+    const fadeEls = document.querySelectorAll(".fade-in");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    // Botão "Enviar intenção" só mostra um aviso
+    document.getElementById("fakeSubmit").addEventListener("click", () => {
+      alert("Para receber retorno rápido, chame diretamente no WhatsApp de Ana Carla usando o botão ao lado.");
+    });
+  </script>
+</body>
+</html>
